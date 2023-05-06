@@ -1,5 +1,4 @@
 from collections import deque
-import itertools
 
 class BFS:
     def __init__(self, grafo):
