@@ -1,5 +1,7 @@
+import sys
+
 def leInputs():
-    inputLido = input().split(" ")
+    inputLido = sys.argv[1:]
 
     algSelecionado = inputLido[0]
 
