@@ -1,20 +1,11 @@
-from utils.getInputs import *
-from utils.gerenciadorDeAlgoritmos import *
+from utils.get_inputs import *
+from utils.algorithm_manager import *
 
 if __name__ == '__main__':
 
-    algSelecionado, elementos, printOuNao = getInputs()
-    alg = gerenciadorDeAlgoritmos(algSelecionado, elementos)
+    selected_algorithm, elements, print_results = get_inputs()
+    alg_instance = algorithm_manager(selected_algorithm, elements)
 
-    alg.setPrintOuNao(printOuNao)
-    alg.ordena_elementos()
-    alg.printResultado()
-
-
-
-
-
-
-
-
-
+    alg_instance.set_print_results(print_results)
+    alg_instance.sort_elements()
+    alg_instance.print_result()
