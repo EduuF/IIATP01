@@ -28,11 +28,11 @@ class BaseAlgorithm(ABC):
 
         for i in range(len(current_node)):
             for j in range(i + 1, len(current_node)):
-                if current_node[i] > current_node[j]:  # Valid swap condition
+                if current_node[i] > current_node[j]:
                     next_node = list(current_node)
                     next_node[i], next_node[j] = next_node[j], next_node[i]
                     next_node = tuple(next_node)
-                    new_g_cost = cost_so_far + self.swap_cost(i, j)  # Calculate swap cost directly
+                    new_g_cost = cost_so_far + self.swap_cost(i, j)
                     neighbor_list.append((next_node, new_g_cost))
 
         return neighbor_list
