@@ -27,7 +27,7 @@ class IDS(BaseAlgorithm):
             visited.add(current)
             expanded_states += 1
 
-            if len(current_path) - 1 < limit:  # Check the limit
+            if len(current_path) - 1 < limit:
                 for next_node, new_cost in self.get_neighbors(current, cost):
                     if next_node not in visited:
                         new_path = current_path + [next_node]

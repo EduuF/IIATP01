@@ -6,7 +6,7 @@ class GBFS(BaseAlgorithm):
         super().__init__(elements)
 
     def search(self, start):
-        open_list = [(self.heuristic(start), start, [start])]  # Priority list stores (heuristic, state, path)
+        open_list = [(self.heuristic(start), start, [start])]
         closed_list = set()
         expanded_states = 0
 
@@ -14,7 +14,7 @@ class GBFS(BaseAlgorithm):
             h, current, path = heapq.heappop(open_list)
             if self.is_ordered(current):
                 if self.print_results:
-                    self.intermediate_steps = path  # Store only the states in the optimal path
+                    self.intermediate_steps = path
                 return len(path) - 1, expanded_states
 
             closed_list.add(current)
@@ -22,5 +22,5 @@ class GBFS(BaseAlgorithm):
 
             for next_node, g in self.get_neighbors(current, len(path) - 1):
                 if next_node not in closed_list:
-                    new_path = path + [next_node]  # Add the next node to the path
+                    new_path = path + [next_node]
                     heapq.heappush(open_list, (self.heuristic(next_node), next_node, new_path))
