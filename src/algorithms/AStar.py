@@ -5,7 +5,7 @@ class AStar(BaseAlgorithm):
     def __init__(self, elements):
         super().__init__(elements)
 
-    def search(self, start):
+    def search_algorithm(self, start):
         open_list = [(self.heuristic(start), start, 0, [start])]
         closed_list = set()
         expanded_states = 0

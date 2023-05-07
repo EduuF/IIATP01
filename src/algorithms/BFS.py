@@ -5,7 +5,7 @@ class BFS(BaseAlgorithm):
     def __init__(self, elements):
         super().__init__(elements)
 
-    def search(self, start):
+    def search_algorithm(self, start):
         queue = deque([(start, 0, [start])])
         visited = set()
         expanded_states = 0
@@ -20,8 +20,8 @@ class BFS(BaseAlgorithm):
             visited.add(current)
             expanded_states += 1
 
-            for next_node, new_g in self.get_neighbors(current, g):
+            for next_node, new_cost in self.get_neighbors(current, g):
                 if next_node not in visited:
                     visited.add(next_node)
                     new_path = path + [next_node]
-                    queue.append((next_node, new_g, new_path))
+                    queue.append((next_node, new_cost, new_path))

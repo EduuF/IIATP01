@@ -5,7 +5,7 @@ class UCS(BaseAlgorithm):
     def __init__(self, elements):
         super().__init__(elements)
 
-    def search(self, start):
+    def search_algorithm(self, start):
         open_list = [(0, start, [start])]
         closed_list = set()
         expanded_states = 0

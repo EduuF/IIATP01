@@ -4,7 +4,7 @@ class IDS(BaseAlgorithm):
     def __init__(self, elements):
         super().__init__(elements)
 
-    def search(self, start):
+    def search_algorithm(self, start):
         depth = 0
         while True:
             cost, found, expanded_states, path = self.dfs_limit(start, depth)

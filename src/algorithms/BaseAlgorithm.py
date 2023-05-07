@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from src.algorithms.heuristic.heuristic import *
 
 class BaseAlgorithm(ABC):
     def __init__(self, elements):
@@ -28,12 +29,18 @@ class BaseAlgorithm(ABC):
 
         for i in range(len(current_node)):
             for j in range(i + 1, len(current_node)):
+                """
+                - O if a seguir garante que só haveram trocas quando o elemento da esquerda for maior que o direita
+                - Isso diminui muito o tempo de execução do programa conforme a execução avança pois cada vez menos 
+                elementos maiores estarão à esquerda de elementos menores (Não sugere uma troca que leva a um estado 
+                pior que o atual)
+                """
                 if current_node[i] > current_node[j]:
                     next_node = list(current_node)
                     next_node[i], next_node[j] = next_node[j], next_node[i]
                     next_node = tuple(next_node)
-                    new_g_cost = cost_so_far + self.swap_cost(i, j)
-                    neighbor_list.append((next_node, new_g_cost))
+                    new_cost = cost_so_far + self.swap_cost(i, j)
+                    neighbor_list.append((next_node, new_cost))
 
         return neighbor_list
 
@@ -41,7 +48,7 @@ class BaseAlgorithm(ABC):
         start = tuple(self.elements)
         if self.is_ordered(start):
             return start, 0
-        self.cost, self.expanded_states = self.search(start)
+        self.cost, self.expanded_states = self.search_algorithm(start)
 
     def print_result(self):
         print(f"{self.cost} {self.expanded_states}")
@@ -49,14 +56,9 @@ class BaseAlgorithm(ABC):
             print(" ".join([str(x) for x in expanded_state]))
 
     def heuristic(self, state):
-        inversions = 0
-        for i in range(len(state)):
-            for j in range(i + 1, len(state)):
-                if state[i] > state[j]:
-                    inversions += 1
-        return inversions * 2
+        return heuristic(state)
 
     @abstractmethod
-    def search(self, start):
+    def search_algorithm(self, start):
         pass
 
