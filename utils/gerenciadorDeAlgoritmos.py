@@ -4,8 +4,7 @@ from src.algoritmos.UCS import *
 from src.algoritmos.G_BFS import *
 from src.algoritmos.AEstrela import *
 
-
-def selecionaAlgoritmo(algoritmo, grafo):
+def gerenciadorDeAlgoritmos(algoritmo, grafo):
     match algoritmo:
         case 'B':
             algBFS = BFS(grafo)

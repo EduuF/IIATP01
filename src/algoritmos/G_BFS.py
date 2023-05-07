@@ -1,20 +1,12 @@
-from src.algoritmos.BaseAlgoritmo import OrdenacaoAlgoritmo
+from src.algoritmos.BaseAlgoritmo import BaseAlgoritmo
 import heapq
 
-class GBFS(OrdenacaoAlgoritmo):
+class GBFS(BaseAlgoritmo):
     def __init__(self, grafo):
         super().__init__(grafo)
 
-    def h(self, state):
-        inversions = 0
-        for i in range(len(state)):
-            for j in range(i + 1, len(state)):
-                if state[i] > state[j]:
-                    inversions += 1
-        return inversions * 2
-
     def busca(self, start):
-        open_list = [(self.h(start), start, 0, [start])]  # A lista de prioridades armazena (h, estado, custo, caminho)
+        open_list = [(self.heuristica(start), start, 0, [start])]  # A lista de prioridades armazena (heuristica, estado, custo, caminho)
         closed_list = set()
         expanded_states = 0
 
@@ -29,7 +21,7 @@ class GBFS(OrdenacaoAlgoritmo):
 
             for next_node, new_g in self.neighbors(current, g):
                 if next_node not in closed_list:
-                    new_h = self.h(next_node)
+                    new_h = self.heuristica(next_node)
                     new_path = path + [next_node]  # Adiciona o próximo nó ao caminho
                     heapq.heappush(open_list, (new_h, next_node, new_g, new_path))
                     expanded_states += 1

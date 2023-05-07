@@ -1,7 +1,7 @@
-from src.algoritmos.BaseAlgoritmo import OrdenacaoAlgoritmo
+from src.algoritmos.BaseAlgoritmo import BaseAlgoritmo
 import heapq
 
-class UCS(OrdenacaoAlgoritmo):
+class UCS(BaseAlgoritmo):
     def __init__(self, grafo):
         super().__init__(grafo)
 

@@ -1,6 +1,6 @@
-from src.algoritmos.BaseAlgoritmo import OrdenacaoAlgoritmo
+from src.algoritmos.BaseAlgoritmo import BaseAlgoritmo
 
-class IDS(OrdenacaoAlgoritmo):
+class IDS(BaseAlgoritmo):
     def __init__(self, grafo):
         super().__init__(grafo)
 

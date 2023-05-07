@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class OrdenacaoAlgoritmo(ABC):
+class BaseAlgoritmo(ABC):
     def __init__(self, grafo):
         self.grafo = grafo
         self.printOuNao = False
@@ -10,9 +10,6 @@ class OrdenacaoAlgoritmo(ABC):
 
     def setPrintOuNao(self, printOuNao):
         self.printOuNao = printOuNao
-
-    def set_grafo(self, grafo):
-        self.grafo = grafo
 
     def is_sorted(self, node):
         for i in range(len(node) - 1):
@@ -45,6 +42,14 @@ class OrdenacaoAlgoritmo(ABC):
         print(f"{self.cost} {self.expanded_states}")
         for estadoExpandido in self.passosIntermediarios:
             print(" ".join([str(x) for x in estadoExpandido]))
+
+    def heuristica(self, state):
+        inversions = 0
+        for i in range(len(state)):
+            for j in range(i + 1, len(state)):
+                if state[i] > state[j]:
+                    inversions += 1
+        return inversions * 2
 
     @abstractmethod
     def busca(self, start):

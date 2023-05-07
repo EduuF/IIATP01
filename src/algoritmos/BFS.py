@@ -1,7 +1,7 @@
-from src.algoritmos.BaseAlgoritmo import OrdenacaoAlgoritmo
+from src.algoritmos.BaseAlgoritmo import BaseAlgoritmo
 from collections import deque
 
-class BFS(OrdenacaoAlgoritmo):
+class BFS(BaseAlgoritmo):
     def __init__(self, grafo):
         super().__init__(grafo)
 
