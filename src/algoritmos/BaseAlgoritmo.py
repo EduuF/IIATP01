@@ -11,30 +11,31 @@ class BaseAlgoritmo(ABC):
     def setPrintOuNao(self, printOuNao):
         self.printOuNao = printOuNao
 
-    def is_sorted(self, node):
-        for i in range(len(node) - 1):
-            if node[i] > node[i + 1]:
+    def estaOrdenado(self, noAtual):
+        for i in range(len(noAtual) - 1):
+            if noAtual[i] > noAtual[i + 1]:
                 return False
         return True
 
-    def neighbors(self, node, g_cost):
-        neighbors_list = []
+    def getVizinhos(self, noAtual, custoAteAgora):
+        listaDeVizinhos = []
 
-        for i in range(len(node)):
-            for j in range(i + 1, len(node)):
-                if node[i] > node[j]:  # Condição de troca válida
-                    next_node = list(node)
+        for i in range(len(noAtual)):
+            for j in range(i + 1, len(noAtual)):
+                if noAtual[i] > noAtual[j]:  # Condição de troca válida
+                    next_node = list(noAtual)
                     next_node[i], next_node[j] = next_node[j], next_node[i]
+                    self.grafo.constroiMatrizDeAdj(next_node)  # Atualiza os pesos da MatAdj com o novo vetor
                     next_node = tuple(next_node)
-                    new_g_cost = g_cost + self.grafo.matrizDeAdj[i][
-                        j]  # Usa diretamente os valores da matriz de adjacência do grafo
-                    neighbors_list.append((next_node, new_g_cost))
+                    new_g_cost = custoAteAgora + self.grafo.matrizDeAdj[i][j]  # Usa diretamente os valores da matriz de adjacência do grafo
+                    listaDeVizinhos.append((next_node, new_g_cost))
 
-        return neighbors_list
+
+        return listaDeVizinhos
 
     def ordena_elementos(self):
         start = tuple(self.grafo.elementos)
-        if self.is_sorted(start):
+        if self.estaOrdenado(start):
             return start, 0
         self.cost, self.expanded_states = self.busca(start)
 

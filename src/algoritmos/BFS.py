@@ -12,7 +12,7 @@ class BFS(BaseAlgoritmo):
 
         while queue:
             current, g, path = queue.popleft()
-            if self.is_sorted(current):
+            if self.estaOrdenado(current):
                 if self.printOuNao:
                     self.passosIntermediarios = path  # Armazena apenas os estados no caminho ótimo
                 return g, expanded_states
@@ -20,7 +20,7 @@ class BFS(BaseAlgoritmo):
             visited.add(current)
             expanded_states += 1
 
-            for next_node, new_g in self.neighbors(current, g):
+            for next_node, new_g in self.getVizinhos(current, g):
                 if next_node not in visited:
                     visited.add(next_node)
                     new_path = path + [next_node]  # Adiciona o próximo nó ao caminho

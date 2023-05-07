@@ -1,5 +1,6 @@
 import sys
 
+
 def getInputs():
     inputLido = sys.argv[1:]
 
@@ -7,7 +8,7 @@ def getInputs():
 
     tamanhoDoVetor = int(inputLido[1])
 
-    elementos = [int(x) for x in inputLido[2:tamanhoDoVetor+2]]
+    elementos = [int(x) for x in inputLido[2:tamanhoDoVetor + 2]]
     printOuNao = (inputLido[-1:] == ["PRINT"])
 
     return algSelecionado, elementos, printOuNao

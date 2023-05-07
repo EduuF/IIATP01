@@ -22,13 +22,13 @@ class IDS(BaseAlgoritmo):
 
         while stack:
             current, cost, current_path = stack.pop()
-            if self.is_sorted(current):
+            if self.estaOrdenado(current):
                 return cost, True, expanded_states, current_path
             visited.add(current)
             expanded_states += 1
 
             if len(current_path) - 1 < limit:  # Verifica o limite
-                for next_node, new_cost in self.neighbors(current, cost):
+                for next_node, new_cost in self.getVizinhos(current, cost):
                     if next_node not in visited:
                         new_path = current_path + [next_node]
                         stack.append((next_node, new_cost, new_path))

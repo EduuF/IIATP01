@@ -6,6 +6,7 @@ if __name__ == '__main__':
 
     algSelecionado, elementos, printOuNao = getInputs()
     grafoElementos = Grafo(elementos)
+
     alg = gerenciadorDeAlgoritmos(algSelecionado, grafoElementos)
 
     alg.setPrintOuNao(printOuNao)
