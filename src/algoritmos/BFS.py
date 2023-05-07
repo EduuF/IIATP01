@@ -2,8 +2,8 @@ from src.algoritmos.BaseAlgoritmo import BaseAlgoritmo
 from collections import deque
 
 class BFS(BaseAlgoritmo):
-    def __init__(self, grafo):
-        super().__init__(grafo)
+    def __init__(self, elementos):
+        super().__init__(elementos)
 
     def busca(self, start):
         queue = deque([(start, 0, [start])])  # Armazena (estado, custo, caminho)

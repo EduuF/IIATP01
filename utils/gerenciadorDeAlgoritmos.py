@@ -4,24 +4,24 @@ from src.algoritmos.UCS import *
 from src.algoritmos.G_BFS import *
 from src.algoritmos.AEstrela import *
 
-def gerenciadorDeAlgoritmos(algoritmo, grafo):
+def gerenciadorDeAlgoritmos(algoritmo, elementos):
 
     if algoritmo == 'B':
-        algBFS = BFS(grafo)
+        algBFS = BFS(elementos)
         return algBFS
 
     if algoritmo == 'I':
-        algIDS = IDS(grafo)
+        algIDS = IDS(elementos)
         return algIDS
 
     if algoritmo == 'U':
-        algUCS = UCS(grafo)
+        algUCS = UCS(elementos)
         return algUCS
 
     if algoritmo == 'A':
-        algAEstrela = AEstrela(grafo)
+        algAEstrela = AEstrela(elementos)
         return algAEstrela
 
     if algoritmo == 'G':
-        algG_BFS = GBFS(grafo)
+        algG_BFS = GBFS(elementos)
         return algG_BFS

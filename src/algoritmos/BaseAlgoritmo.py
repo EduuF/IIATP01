@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
 class BaseAlgoritmo(ABC):
-    def __init__(self, grafo):
-        self.grafo = grafo
+    def __init__(self, elementos):
+        self.elementos = elementos
         self.printOuNao = False
         self.passosIntermediarios = []
         self.expanded_states = 0
@@ -17,6 +17,12 @@ class BaseAlgoritmo(ABC):
                 return False
         return True
 
+    def custoTroca(self, i, j):
+        if abs(i - j) == 1:
+            return 2
+        else:
+            return 4
+
     def getVizinhos(self, noAtual, custoAteAgora):
         listaDeVizinhos = []
 
@@ -25,16 +31,14 @@ class BaseAlgoritmo(ABC):
                 if noAtual[i] > noAtual[j]:  # Condição de troca válida
                     next_node = list(noAtual)
                     next_node[i], next_node[j] = next_node[j], next_node[i]
-                    self.grafo.constroiMatrizDeAdj(next_node)  # Atualiza os pesos da MatAdj com o novo vetor
                     next_node = tuple(next_node)
-                    new_g_cost = custoAteAgora + self.grafo.matrizDeAdj[i][j]  # Usa diretamente os valores da matriz de adjacência do grafo
+                    new_g_cost = custoAteAgora + self.custoTroca(i, j)  # Calcula o custo da troca diretamente
                     listaDeVizinhos.append((next_node, new_g_cost))
-
 
         return listaDeVizinhos
 
     def ordena_elementos(self):
-        start = tuple(self.grafo.elementos)
+        start = tuple(self.elementos)
         if self.estaOrdenado(start):
             return start, 0
         self.cost, self.expanded_states = self.busca(start)

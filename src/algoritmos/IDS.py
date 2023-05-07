@@ -1,8 +1,8 @@
 from src.algoritmos.BaseAlgoritmo import BaseAlgoritmo
 
 class IDS(BaseAlgoritmo):
-    def __init__(self, grafo):
-        super().__init__(grafo)
+    def __init__(self, elementos):
+        super().__init__(elementos)
 
     def busca(self, start):
         depth = 0

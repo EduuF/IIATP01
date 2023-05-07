@@ -2,8 +2,8 @@ from src.algoritmos.BaseAlgoritmo import BaseAlgoritmo
 import heapq
 
 class UCS(BaseAlgoritmo):
-    def __init__(self, grafo):
-        super().__init__(grafo)
+    def __init__(self, elementos):
+        super().__init__(elementos)
 
     def busca(self, start):
         open_list = [(0, start, [start])]  # A lista de prioridades armazena (custo, estado, caminho)
