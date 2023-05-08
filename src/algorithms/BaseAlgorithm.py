@@ -13,10 +13,7 @@ class BaseAlgorithm(ABC):
         self.print_results = print_results
 
     def is_ordered(self, current_node):
-        for i in range(len(current_node) - 1):
-            if current_node[i] > current_node[i + 1]:
-                return False
-        return True
+        return all(current_node[i] <= current_node[i + 1] for i in range(len(current_node) - 1))
 
     def swap_cost(self, i, j):
         if abs(i - j) == 1:
@@ -27,17 +24,17 @@ class BaseAlgorithm(ABC):
     def get_neighbors(self, current_node, cost_so_far):
         neighbor_list = []
 
-        for i in range(len(current_node)):
-            for j in range(i + 1, len(current_node)):
+        for i, elemento_i in enumerate(current_node):
+            for j, elemento_j in enumerate(current_node[i + 1:], i + 1):
                 """
                 - O if a seguir garante que só haveram trocas quando o elemento da esquerda for maior que o direita
                 - Isso diminui muito o tempo de execução do programa conforme a execução avança pois cada vez menos 
                 elementos maiores estarão à esquerda de elementos menores (Não sugere uma troca que leva a um estado 
                 pior que o atual)
                 """
-                if current_node[i] > current_node[j]:
+                if elemento_i > elemento_j:
                     next_node = list(current_node)
-                    next_node[i], next_node[j] = next_node[j], next_node[i]
+                    next_node[i], next_node[j] = elemento_j, elemento_i
                     next_node = tuple(next_node)
                     new_cost = cost_so_far + self.swap_cost(i, j)
                     neighbor_list.append((next_node, new_cost))
@@ -51,7 +48,7 @@ class BaseAlgorithm(ABC):
         self.cost, self.expanded_states = self.search_algorithm(start)
 
     def print_result(self):
-        print(f"{self.cost} {self.expanded_states}")
+        print("{} {}".format(self.cost, self.expanded_states))
         for expanded_state in self.intermediate_steps:
             print(" ".join([str(x) for x in expanded_state]))
 
