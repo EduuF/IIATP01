@@ -12,14 +12,11 @@ class BaseAlgorithm(ABC):
     def set_print_results(self, print_results):
         self.print_results = print_results
 
-    def is_ordered(self, current_node):
-        return all(current_node[i] <= current_node[i + 1] for i in range(len(current_node) - 1))
-
-    def swap_cost(self, i, j):
-        if abs(i - j) == 1:
-            return 2
-        else:
-            return 4
+    def sort_elements(self):
+        start = tuple(self.elements)
+        if self.is_ordered(start):
+            return start, 0
+        self.cost, self.expanded_states = self.search_algorithm(start)
 
     def get_neighbors(self, current_node, cost_so_far):
         neighbor_list = []
@@ -41,11 +38,14 @@ class BaseAlgorithm(ABC):
 
         return neighbor_list
 
-    def sort_elements(self):
-        start = tuple(self.elements)
-        if self.is_ordered(start):
-            return start, 0
-        self.cost, self.expanded_states = self.search_algorithm(start)
+    def is_ordered(self, current_node):
+        return all(current_node[i] <= current_node[i + 1] for i in range(len(current_node) - 1))
+
+    def swap_cost(self, i, j):
+        if abs(i - j) == 1:
+            return 2
+        else:
+            return 4
 
     def print_result(self):
         print("{} {}".format(self.cost, self.expanded_states))

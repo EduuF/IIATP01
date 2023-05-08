@@ -22,10 +22,11 @@ class IDS(BaseAlgorithm):
 
         while open_list:
             current_state, cost_so_far, path_so_far, current_depth = open_list.pop()
+            expanded_states += 1
+
             if self.is_ordered(current_state):
                 return cost_so_far, True, expanded_states, path_so_far
             closed_list.add(current_state)
-            expanded_states += 1
 
             if current_depth + 1 <= limit:
                 for next_node, new_cost in self.get_neighbors(current_state, cost_so_far):

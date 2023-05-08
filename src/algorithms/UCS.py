@@ -13,6 +13,7 @@ class UCS(BaseAlgorithm):
         while open_list:
             cost_so_far, current_node, path_so_far = heapq.heappop(open_list)
             closed_list.add(current_node)
+            expanded_states += 1
 
             if self.is_ordered(current_node):
                 if self.print_results:
@@ -30,4 +31,3 @@ class UCS(BaseAlgorithm):
                     if add_next_node_to_open_list:
                         new_path = path_so_far + [next_node]
                         heapq.heappush(open_list, (new_cost, next_node, new_path))
-                        expanded_states += 1

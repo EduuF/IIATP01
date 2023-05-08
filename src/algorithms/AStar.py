@@ -11,17 +11,17 @@ class AStar(BaseAlgorithm):
         expanded_states = 0
 
         while open_list:
-            f, current, g, path = heapq.heappop(open_list)
-            if self.is_ordered(current):
+            current_heuristic, current_state, cost_so_far, path_so_far = heapq.heappop(open_list)
+            closed_list.add(current_state)
+            expanded_states += 1
+
+            if self.is_ordered(current_state):
                 if self.print_results:
-                    self.intermediate_steps = path
-                return g, expanded_states
+                    self.intermediate_steps = path_so_far
+                return cost_so_far, expanded_states
 
-            closed_list.add(current)
-
-            for next_node, new_g in self.get_neighbors(current, g):
+            for next_node, new_cost in self.get_neighbors(current_state, cost_so_far):
                 if next_node not in closed_list:
-                    new_h = self.heuristic(next_node)
-                    new_path = path + [next_node]
-                    heapq.heappush(open_list, (new_g + new_h, next_node, new_g, new_path))
-                    expanded_states += 1
+                    new_heuristic = self.heuristic(next_node)
+                    new_path = path_so_far + [next_node]
+                    heapq.heappush(open_list, (new_cost + new_heuristic, next_node, new_cost, new_path))

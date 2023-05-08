@@ -13,12 +13,12 @@ class BFS(BaseAlgorithm):
 
         while open_list:
             current_state, cost_so_far, path_so_far = open_list.popleft()
+            expanded_states += 1
+
             if self.is_ordered(current_state):
                 if self.print_results:
                     self.intermediate_steps = path_so_far
                 return cost_so_far, expanded_states
-
-            expanded_states += 1
 
             for next_node, new_cost in self.get_neighbors(current_state, cost_so_far):
                 if next_node not in closed_list:
