@@ -11,16 +11,23 @@ class UCS(BaseAlgorithm):
         expanded_states = 0
 
         while open_list:
-            g, current, path = heapq.heappop(open_list)
-            if self.is_ordered(current):
+            cost_so_far, current_node, path_so_far = heapq.heappop(open_list)
+            closed_list.add(current_node)
+
+            if self.is_ordered(current_node):
                 if self.print_results:
-                    self.intermediate_steps = path
-                return g, expanded_states
+                    self.intermediate_steps = path_so_far
+                return cost_so_far, expanded_states
 
-            closed_list.add(current)
-
-            for next_node, new_g in self.get_neighbors(current, g):
+            for next_node, new_cost in self.get_neighbors(current_node, cost_so_far):
                 if next_node not in closed_list:
-                    new_path = path + [next_node]
-                    heapq.heappush(open_list, (new_g, next_node, new_path))
-                    expanded_states += 1
+                    add_next_node_to_open_list = True
+                    for cost, node, _ in open_list:
+                        if node == next_node and new_cost >= cost:
+                            add_next_node_to_open_list = False
+                            break
+
+                    if add_next_node_to_open_list:
+                        new_path = path_so_far + [next_node]
+                        heapq.heappush(open_list, (new_cost, next_node, new_path))
+                        expanded_states += 1
